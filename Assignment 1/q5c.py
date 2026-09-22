@@ -135,7 +135,7 @@ ax[1].plot(ep, h["accuracy"], "o-", label="Train accuracy")
 ax[1].plot(ep, h["val_accuracy"], "s-", label="Val accuracy")
 ax[1].set_xlabel("Epoke"); ax[1].set_ylabel("Accuracy"); ax[1].set_title("Nøyaktighet")
 ax[1].legend(); ax[1].grid(alpha=0.3)
-fig.suptitle("Q5(b) Transfer Learning (MobileNetV2) – training")
+fig.suptitle("Q5(a) Fusion (MobileNetV2 + ResNet50) – trening")
 fig.tight_layout()
 fig.savefig(os.path.join(OUT_DIR, "loss_accuracy_curves.png"), dpi=150)
 
