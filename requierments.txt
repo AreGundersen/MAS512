@@ -1,1 +1,3 @@
-ultraytics
+mss 
+ultralytics 
+opencv-python

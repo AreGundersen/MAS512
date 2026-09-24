@@ -1,1 +1,13 @@
 .venv
+/Assignment 1/Q1_work/dataset/images/train
+/Assignment 1/Q1_work/dataset/labels/train
+/Assignment 1/Q1_work/dataset/images/val
+/Assignment 1/Q1_work/dataset/labels/val
+/Assignment 1/Q1_work/dataset/images/test
+/Assignment 1/Q1_work/dataset/labels/test
+/Assignment 1/Assignment 1-class/train/labels
+/Assignment 1/Assignment 1-class/test/labels
+*.cache
+*.csv
+args*.yaml
+/Assignment 1/runs

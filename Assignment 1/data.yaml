@@ -1,0 +1,6 @@
+path: C:/Users/aregu/Documents/MAS512/Assignments/Assignment 1/Q1_work/dataset
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: Payload
