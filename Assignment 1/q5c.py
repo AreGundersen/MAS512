@@ -16,7 +16,7 @@ BATCH_SIZE = 64
 EPOCHS = 30            
 LR = 1e-3
 VAL_FRACTION = 0.10    
-OUT_DIR = os.path.join("results", "q5b")
+OUT_DIR = os.path.join("results", "q5c")
 
 CLASS_NAMES = ["airplane", "automobile", "bird", "cat", "deer",
                "dog", "frog", "horse", "ship", "truck"]
