@@ -51,7 +51,9 @@ decoder = keras.Sequential([
     layers.Dense(input_dim, activation="sigmoid"),  # sigmoid to get an output in the range [0, 1], which is the same range as the input images
 ], name="decoder")
 
-autoencoder = keras.Sequential([encoder, decoder], name="autoencoder")
+autoencoder = keras.Sequential([
+    layers.Input(shape=(input_dim,)), encoder, decoder,], name="autoencoder")
+
 autoencoder.compile(optimizer="adam", loss="mse")
 autoencoder.summary()
 
