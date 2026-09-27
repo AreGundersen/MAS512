@@ -79,7 +79,6 @@ def build_transfer_learning_model():
     mobilenet = tf.keras.applications.MobileNetV2(
         include_top=False, weights="imagenet",
         input_shape=(IMG_SIZE, IMG_SIZE, 3))
-    mobilenet._name = "mobilenetv2_backbone"
     mobilenet.trainable = False                      
     x = mobilenet(x1, training=False)               
     x = tf.keras.layers.GlobalAveragePooling2D(name="gap_mobilenet")(x)  # 1280
@@ -107,16 +106,10 @@ print(f"\nParametere: totalt {total_params:,} | trenbare {trainable_params:,}")
 # -----------------
 #      Training
 # ---------------
-callbacks = [
-    tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=4,
-                                     restore_best_weights=True, verbose=1),
-    tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.5,
-                                         patience=2, min_lr=1e-6, verbose=1),
-]
+callbacks = [tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=4, restore_best_weights=True, verbose=1),]
 
 t0 = time.time()
-history = model.fit(train_ds, validation_data=val_ds, epochs=EPOCHS,
-                    callbacks=callbacks, verbose=1)
+history = model.fit(train_ds, validation_data=val_ds, epochs=EPOCHS, callbacks=callbacks, verbose=1)
 train_time = time.time() - t0
 epochs_run = len(history.history["loss"])
 print(f"\nTreningstid: {train_time:.1f} s over {epochs_run} epoker")

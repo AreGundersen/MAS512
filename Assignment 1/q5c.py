@@ -14,7 +14,8 @@ SEED = 42
 IMG_SIZE = 96          
 BATCH_SIZE = 64
 EPOCHS = 30            
-LR = 1e-3
+LR = 1e-4
+FINE_TUNE_LAYERS = 30
 VAL_FRACTION = 0.10    
 OUT_DIR = os.path.join("results", "q5c")
 
@@ -71,7 +72,7 @@ test_ds = make_ds(x_test, y_test, training=False)
 # ----------------------
 #       Model 
 # ----------------------
-def build_transfer_learning_model():
+def build_finetuning_model():
     inp = tf.keras.Input(shape=(IMG_SIZE, IMG_SIZE, 3), name="image")
 
     # Model 1: MobileNetV2
@@ -79,8 +80,9 @@ def build_transfer_learning_model():
     mobilenet = tf.keras.applications.MobileNetV2(
         include_top=False, weights="imagenet",
         input_shape=(IMG_SIZE, IMG_SIZE, 3))
-    mobilenet._name = "mobilenetv2_backbone"
-    mobilenet.trainable = False                      
+    mobilenet.trainable = True                      
+    for layer in mobilenet.layers[:-FINE_TUNE_LAYERS]:
+        layer.trainable = False                  # frys alt unntatt de siste lagene
     x = mobilenet(x1, training=False)               
     x = tf.keras.layers.GlobalAveragePooling2D(name="gap_mobilenet")(x)  # 1280
     x = tf.keras.layers.BatchNormalization(name="bn_head")(x)
@@ -92,9 +94,9 @@ def build_transfer_learning_model():
     out = tf.keras.layers.Dense(len(CLASS_NAMES), activation="softmax",
                                 name="output")(x)           
 
-    return tf.keras.Model(inp, out, name="transfer_learning_mobilenetv2")
+    return tf.keras.Model(inp, out, name="finetuning_mobilenetv2")
 
-model = build_transfer_learning_model()
+model = build_finetuning_model()
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=LR),
               loss="sparse_categorical_crossentropy",      
               metrics=["accuracy"])
@@ -110,8 +112,6 @@ print(f"\nParametere: totalt {total_params:,} | trenbare {trainable_params:,}")
 callbacks = [
     tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=4,
                                      restore_best_weights=True, verbose=1),
-    tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.5,
-                                         patience=2, min_lr=1e-6, verbose=1),
 ]
 
 t0 = time.time()
@@ -135,7 +135,7 @@ ax[1].plot(ep, h["accuracy"], "o-", label="Train accuracy")
 ax[1].plot(ep, h["val_accuracy"], "s-", label="Val accuracy")
 ax[1].set_xlabel("Epoke"); ax[1].set_ylabel("Accuracy"); ax[1].set_title("Nøyaktighet")
 ax[1].legend(); ax[1].grid(alpha=0.3)
-fig.suptitle("Q5(a) Fusion (MobileNetV2 + ResNet50) – trening")
+fig.suptitle("Q5(c) Finetuning (MobileNetV2) – trening")
 fig.tight_layout()
 fig.savefig(os.path.join(OUT_DIR, "loss_accuracy_curves.png"), dpi=150)
 

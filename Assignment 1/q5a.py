@@ -37,12 +37,12 @@ x_train, x_val, y_train, y_val = train_test_split(
 
 n_total = len(x_train_full) + len(x_test)
 split_table = {
-    "Totalt": n_total,
-    "Trening": len(x_train),
-    "Validering": len(x_val),
+    "Total": n_total,
+    "Training": len(x_train),
+    "Validation": len(x_val),
     "Test": len(x_test),
 }
-print("\nDatasett-oppdeling:")
+print("\nDataset-distributiuon:")
 for k, v in split_table.items():
     print(f"  {k:<11} {v:>6}  ({100 * v / n_total:5.1f} %)")
 
@@ -55,7 +55,7 @@ def make_ds(x, y, training):
     def _prep(img, label):
         img = tf.image.resize(tf.cast(img, tf.float32), (IMG_SIZE, IMG_SIZE))
         if training:
-            # Reccomended from claude to avaid overfitting. It rotates the image and flips it horizontally to create more training data.
+            # Reccomended from claude to avaid overfitting. It rotates the image and flips it horizontally
             img = tf.image.random_flip_left_right(img)
         return img, label
 
@@ -76,20 +76,15 @@ def build_fusion_model():
 
     # Model 1: MobileNetV2
     x1 = tf.keras.applications.mobilenet_v2.preprocess_input(inp)
-    mobilenet = tf.keras.applications.MobileNetV2(
-        include_top=False, weights="imagenet",
-        input_shape=(IMG_SIZE, IMG_SIZE, 3))
-    mobilenet._name = "mobilenetv2_backbone"
+    mobilenet = tf.keras.applications.MobileNetV2(include_top=False, weights="imagenet", input_shape=(IMG_SIZE, IMG_SIZE, 3))
     mobilenet.trainable = False                      
     f1 = mobilenet(x1, training=False)               
-    f1 = tf.keras.layers.GlobalAveragePooling2D(name="gap_mobilenet")(f1)  # 1280
+    f1 = tf.keras.layers.GlobalAveragePooling2D(name="gap_mobilenet")(f1)  
 
     # Model 2: ResNet50
     x2 = tf.keras.applications.resnet50.preprocess_input(inp)
     resnet = tf.keras.applications.ResNet50(
-        include_top=False, weights="imagenet",
-        input_shape=(IMG_SIZE, IMG_SIZE, 3))
-    resnet._name = "resnet50_backbone"
+        include_top=False, weights="imagenet", input_shape=(IMG_SIZE, IMG_SIZE, 3))
     resnet.trainable = False
     f2 = resnet(x2, training=False)
     f2 = tf.keras.layers.GlobalAveragePooling2D(name="gap_resnet")(f2)     # 2048
@@ -97,16 +92,11 @@ def build_fusion_model():
     # Fusion:
     x = tf.keras.layers.Concatenate(name="feature_fusion")([f1, f2])       # 3328
     x = tf.keras.layers.BatchNormalization(name="bn_fusion")(x)
-
-    x = tf.keras.layers.Dense(256, activation="relu",
-                              kernel_regularizer=tf.keras.regularizers.l2(1e-4),
-                              name="dense_256")(x)
+    x = tf.keras.layers.Dense(256, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(1e-4), name="dense_256")(x)
     x = tf.keras.layers.Dropout(0.4, name="dropout")(x)
-    out = tf.keras.layers.Dense(len(CLASS_NAMES), activation="softmax",
-                                name="output")(x)           
+    out = tf.keras.layers.Dense(len(CLASS_NAMES), activation="softmax", name="output")(x)           
 
     return tf.keras.Model(inp, out, name="fusion_mobilenetv2_resnet50")
-
 
 model = build_fusion_model()
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=LR),
@@ -124,8 +114,6 @@ print(f"\nParametere: totalt {total_params:,} | trenbare {trainable_params:,}")
 callbacks = [
     tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=4,
                                      restore_best_weights=True, verbose=1),
-    tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.5,
-                                         patience=2, min_lr=1e-6, verbose=1),
 ]
 
 t0 = time.time()
