@@ -1,4 +1,4 @@
-path: C:/Users/aregu/Documents/MAS512/Assignments/Assignment 1/Q1_work/dataset
+path: C:/Users/aregu/Documents/MAS512/Assignments/Assignment 1/Q1/dataset
 train: images/train
 val: images/val
 test: images/test

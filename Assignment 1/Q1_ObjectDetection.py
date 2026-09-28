@@ -18,7 +18,7 @@ DEBUG = False            # show plots for annotation and evaluation
 # Directories and paths
 HERE = Path(__file__).resolve().parent
 classDir   = HERE / "Assignment 1-class"
-datasetDir = HERE / "Q1_work" / "dataset"
+datasetDir = HERE / "Q1" / "dataset"
 dataYaml   = HERE / "data.yaml"
 modelPath  = HERE / "YOLO_swinging_load.pt"
 outputDir  = HERE / "runs"
@@ -120,9 +120,9 @@ if DO_DATASET:
 if DO_TRAIN:
     model = YOLO("yolo11n.pt")      # Loading the YOLO model
     model.train(data=dataYaml,  
-                epochs=50, 
+                epochs=100, 
                 imgsz=640, 
-                batch=16, 
+                batch=32, 
                 patience=10, 
                 project=outputDir, 
                 name="swinging_load", 
