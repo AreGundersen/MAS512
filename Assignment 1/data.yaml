@@ -1,4 +1,4 @@
-path: C:/Users/aregu/Documents/MAS512/Assignments/Assignment 1/Q1/dataset
+path: c:/Users/ssgje/Documents/School/MAS512 - Computer Vision and Embedded AI/Assignments/MAS512/Assignment 1/Q1/dataset
 train: images/train
 val: images/val
 test: images/test
