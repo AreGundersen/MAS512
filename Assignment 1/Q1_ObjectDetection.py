@@ -10,10 +10,10 @@ from ultralytics import YOLO
 # Which steps to run. Annotate/dataset/train only need to run once.
 DO_ANNOTATE = True
 DO_DATASET  = True
-DO_TRAIN    = True
+DO_TRAIN    = False
 DO_EVAL     = True      # Q1 a) b) c)
 
-DEBUG = False            # show plots for annotation and evaluation
+DEBUG = True            # show plots for annotation and evaluation
 
 # Directories and paths
 HERE = Path(__file__).resolve().parent
