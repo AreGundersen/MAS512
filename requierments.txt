@@ -1,3 +1,0 @@
-mss 
-ultralytics 
-opencv-python
