@@ -25,8 +25,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.16545254697095957 0.10882532581672578 -0.9801951352469088 1.87313450678334
-  position 3.0397331948085062 8.086644241578322 2.645515410457559
+  orientation 0.06662138988139106 0.04391109339410982 -0.9968116202609223 1.6854474284563579
+  position 1.2304455124527691 1.7456763843247394 0.23299044155988638
 }
 TexturedBackground {
 }
@@ -510,10 +510,9 @@ DEF ROSEY Robot {
       }
     }
     DEF LIDAR_MOUNT Pose {
-      translation 0.2 0 0.9
+      translation 0.19731 0 0.05068
       children [
         Lidar {
-          name "lidar"
           horizontalResolution 1080
           fieldOfView 6.2832
           numberOfLayers 1
@@ -543,7 +542,7 @@ DEF ROSEY Robot {
       0 0 0
     ]
   }
-  customData "baseline"
   controller "slip_controller"
+  customData "baseline"
   supervisor TRUE
 }
