@@ -25,8 +25,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.06662138988139106 0.04391109339410982 -0.9968116202609223 1.6854474284563579
-  position 1.2304455124527691 1.7456763843247394 0.23299044155988638
+  orientation 0.23904310200986595 0.2197779614665526 -0.9458097287695381 1.6347316467796356
+  position 1.211559978971388 11.837166581070374 6.1684529341700305
 }
 TexturedBackground {
 }
@@ -218,7 +218,6 @@ DEF ROSEY Robot {
         }
         PositionSensor {
           name "left_wheel_sensor"
-          resolution 0
         }
       ]
       endPoint Solid {
@@ -258,7 +257,6 @@ DEF ROSEY Robot {
         }
         PositionSensor {
           name "right_wheel_sensor"
-          resolution 0
         }
       ]
       endPoint Solid {
