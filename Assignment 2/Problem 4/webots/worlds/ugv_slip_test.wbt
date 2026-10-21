@@ -165,6 +165,27 @@ DEF OBSTACLES Group {
     }
   ]
 }
+DEF GOAL Solid {
+  translation 3.5 4 0.5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.8 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Cylinder {
+        height 1
+        radius 0.1
+      }
+    }
+  ]
+  name "goal"
+  boundingObject Cylinder {
+    height 1
+    radius 0.1
+  }
+}
 DEF ROSEY Robot {
   translation 1 0.6 0.0625
   rotation 0 0 1 1.5604
@@ -492,24 +513,12 @@ DEF ROSEY Robot {
       translation 0.2 0 0.9
       children [
         Lidar {
-          horizontalResolution 360
+          name "lidar"
+          horizontalResolution 1080
           fieldOfView 6.2832
           numberOfLayers 1
           minRange 0.1
           maxRange 20
-          noise 0.005
-        }
-      ]
-    }
-    DEF IMU_MOUNT Pose {
-      translation 0 0 0.35
-      children [
-        InertialUnit {
-          name "imu"
-        }
-        Gyro {
-        }
-        Accelerometer {
         }
       ]
     }
@@ -534,6 +543,7 @@ DEF ROSEY Robot {
       0 0 0
     ]
   }
+  customData "baseline"
   controller "slip_controller"
   supervisor TRUE
 }
