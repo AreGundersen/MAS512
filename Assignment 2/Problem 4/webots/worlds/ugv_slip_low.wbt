@@ -187,8 +187,7 @@ DEF GOAL Solid {
   }
 }
 DEF ROSEY Robot {
-  translation 2.771221356105364 3.4812900199883434 0.062455194229443844
-  rotation 1.2902560498309804e-05 -4.000377543551248e-05 0.999999999116611 0.6228596973843128
+  translation 0 -2 0.0624552
   children [
     Pose {
       children [
@@ -244,8 +243,6 @@ DEF ROSEY Robot {
           density -1
           mass 1.5
         }
-        linearVelocity 1.6271171633254344e-10 1.2259582883708808e-10 -4.483384772619899e-15
-        angularVelocity -1.4228009459804016e-11 2.0855118021175396e-11 -1.5602787063365264e-10
       }
     }
     HingeJoint {
@@ -265,7 +262,7 @@ DEF ROSEY Robot {
       ]
       endPoint Solid {
         translation 0 -0.126 0
-        rotation -0.08531366212781584 0.7045274773152466 -0.7045300651939246 3.3118071882607767
+        rotation -0.08531366212781583 0.7045274773152466 -0.7045300651939245 3.3118071882607767
         children [
           Shape {
             appearance USE WHEEL_APP
@@ -279,8 +276,6 @@ DEF ROSEY Robot {
           density -1
           mass 1.5
         }
-        linearVelocity -1.68680788750033e-10 -1.154789109303103e-10 4.660253905683881e-15
-        angularVelocity 1.526901888588798e-11 -2.0230147729915755e-11 -1.560249998583549e-10
       }
     }
     HingeJoint {
@@ -314,7 +309,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 0.3356079490707026 -0.6660946047816501 0.6660970514882453 2.494002250089806
+              rotation 0.3356079490707027 -0.66609460478165 0.6660970514882452 2.494002250089806
               children [
                 DEF CASTER_WHEEL_SHAPE Shape {
                   appearance USE WHEEL_APP
@@ -331,8 +326,6 @@ DEF ROSEY Robot {
                 density -1
                 mass 0.02
               }
-              linearVelocity -3.003839755295749e-11 2.5091412527220157e-11 8.226752612472411e-15
-              angularVelocity 2.2498401930060266e-10 -3.116436524983801e-10 3.0419373014546735e-09
             }
           }
           HingeJoint {
@@ -343,7 +336,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation -0.09562930447258591 -0.7038648295348738 0.7038674149795062 3.3322707269374146
+              rotation -0.09562930447258593 -0.7038648295348738 0.7038674149795062 3.3322707269374146
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -351,8 +344,6 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity 5.536239005396498e-11 8.608858020171199e-11 -2.23265850252119e-14
-              angularVelocity -2.2046285686937314e-09 3.0918795404350055e-09 3.0419771839329036e-09
             }
           }
         ]
@@ -369,8 +360,6 @@ DEF ROSEY Robot {
           density -1
           mass 0.043
         }
-        linearVelocity 3.157598881573288e-11 2.9096147941337896e-11 -1.332267629550188e-15
-        angularVelocity 1.357098549412832e-12 9.877509575487429e-13 3.0417271444623773e-09
       }
     }
     HingeJoint {
@@ -401,8 +390,6 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity -1.0799800703931899e-10 -2.7437175270578545e-11 1.6753265441593613e-14
-              angularVelocity 2.4089937510594814e-09 -3.370951909644714e-09 3.5687295490181095e-09
             }
           }
           HingeJoint {
@@ -413,7 +400,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 0.16308282284924216 0.6976390246320114 -0.6976415872079434 2.818274459200093
+              rotation 0.1630828228492422 0.6976390246320116 -0.6976415872079434 2.818274459200093
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -421,16 +408,12 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity -7.786704967475316e-12 4.4111173591554165e-11 -1.5221157667610896e-14
-              angularVelocity -4.407157339743958e-10 6.226177886897846e-10 3.5688053567880914e-09
             }
           }
         ]
         name "caster_fork_2"
         boundingObject USE FORK_BO
         physics USE FORK_PHYS
-        linearVelocity -3.7632847480219704e-11 -2.0053210757386847e-11 1.4531012052535773e-14
-        angularVelocity -2.3424759795415194e-13 -2.376569210630616e-13 3.5685328183827813e-09
       }
     }
     HingeJoint {
@@ -453,7 +436,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 0.5126967867670558 -0.6070993729056893 0.6071016029102997 2.194088899366233
+              rotation 0.5126967867670555 -0.6070993729056892 0.6071016029102995 2.194088899366233
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -461,8 +444,6 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity 1.6579541756247304e-10 6.789639124110534e-11 -9.536815781530095e-15
-              angularVelocity -4.083489273202387e-09 5.64882541953144e-09 -7.629851535517455e-09
             }
           }
           HingeJoint {
@@ -473,7 +454,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 0.03837676846967384 -0.7065845865310576 0.7065871819659335 3.064877045169898
+              rotation 0.03837676846967385 -0.7065845865310578 0.7065871819659334 3.064877045169898
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -481,16 +462,12 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity -4.760438289223845e-11 -8.621612121958615e-11 8.93729534823251e-15
-              angularVelocity 2.0823270995163253e-09 -2.8881663274441202e-09 -7.629900068812228e-09
             }
           }
         ]
         name "caster_fork_3"
         boundingObject USE FORK_BO
         physics USE FORK_PHYS
-        linearVelocity 3.610137507896687e-11 2.2653602447558636e-11 -1.058584744410033e-14
-        angularVelocity -1.2182786682558486e-12 -6.552578228432398e-13 -7.629657079546824e-09
       }
     }
     HingeJoint {
@@ -513,7 +490,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation -0.11774300735057913 0.7021869273698094 -0.7021895066511515 3.3759985647554838
+              rotation -0.11774300735057916 0.7021869273698095 -0.7021895066511515 3.3759985647554838
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -521,8 +498,6 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity 9.987521413945696e-11 2.1767707346579e-11 -5.2735593669694936e-15
-              angularVelocity -2.2016062920611476e-09 3.0422069792488023e-09 -7.886965890815515e-09
             }
           }
           HingeJoint {
@@ -533,7 +508,7 @@ DEF ROSEY Robot {
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 0.3426288431669194 0.664304987877993 -0.6643074280109461 2.4814087965809177
+              rotation 0.34262884316691933 0.664304987877993 -0.6643074280109461 2.4814087965809177
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -541,16 +516,12 @@ DEF ROSEY Robot {
               contactMaterial "caster"
               boundingObject USE CASTER_WHEEL
               physics USE CASTER_PHYS
-              linearVelocity -1.2070158399752773e-10 -1.3757169219336362e-10 1.1779466291272912e-14
-              angularVelocity 4.1832390009142035e-09 -5.79499863248055e-09 -7.886918942861992e-09
             }
           }
         ]
         name "caster_fork_4"
         boundingObject USE FORK_BO
         physics USE FORK_PHYS
-        linearVelocity -3.359924245319749e-11 -2.5769522618826548e-11 1.8496831973057263e-14
-        angularVelocity -2.419788092757095e-12 -2.0231698056770618e-12 -7.886580528999377e-09
       }
     }
     DEF LIDAR_MOUNT Pose {
@@ -589,6 +560,4 @@ DEF ROSEY Robot {
   controller "slip_controller"
   customData "low_slip"
   supervisor TRUE
-  linearVelocity 3.977972032982377e-12 -5.438178531168118e-12 6.480149750132114e-16
-  angularVelocity -7.220338026971067e-14 -7.039520575727704e-14 -1.5601670786151904e-10
 }

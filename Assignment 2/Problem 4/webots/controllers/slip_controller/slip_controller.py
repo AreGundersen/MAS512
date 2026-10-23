@@ -6,12 +6,12 @@ from controller import Supervisor
 R_W = 0.0625        # wheel radius [m]
 B = 0.2529          # wheel track [m]
 LIDAR_X = 0.19731   # lidar position along robot x [m]
-V_MAX = 0.8         # top speed [m/s]
-ACC = 3.0           # max speed change [m/s^2]
+V_MAX = 0.5         # top speed [m/s]
+ACC = 1.5           # max speed change [m/s^2]
 STOP_DIST = 0.6     # stop when lidar range to goal is below this [m]
 CORRIDOR = 0.5      # half-width of free corridor [m]
-LOOK = 1.2          # corridor length [m]
-V_MIN = 0.2         # slip is undefined below this speed [m/s]
+LOOK = 1.6          # corridor length [m]
+V_MIN = 0         # slip is undefined below this speed [m/s]
 T_MAX = 120.0       # timeout [s]
 INF = float('inf')
 

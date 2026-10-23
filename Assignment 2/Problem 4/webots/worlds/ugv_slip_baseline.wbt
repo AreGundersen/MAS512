@@ -187,8 +187,7 @@ DEF GOAL Solid {
   }
 }
 DEF ROSEY Robot {
-  translation 1 0.6 0.0625
-  rotation 0 0 1 1.5604
+  translation 0 -2 0.0624552
   children [
     Pose {
       children [
@@ -208,6 +207,7 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position 71.24024682293148
         axis 0 1 0
         anchor 0 0.126 0
       }
@@ -222,7 +222,7 @@ DEF ROSEY Robot {
       ]
       endPoint Solid {
         translation 0 0.126 0
-        rotation 1 0 0 1.5708
+        rotation -0.3664528397595308 -0.6579168398412057 0.657919256509138 3.844102870134211
         children [
           Shape {
             appearance DEF WHEEL_APP PBRAppearance {
@@ -247,6 +247,7 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position 54.16235938910128
         axis 0 1 0
         anchor 0 -0.126 0
       }
@@ -261,7 +262,7 @@ DEF ROSEY Robot {
       ]
       endPoint Solid {
         translation 0 -0.126 0
-        rotation 1 0 0 1.5708
+        rotation -0.2700732247557768 0.6808292913744339 -0.6808317922046546 3.6691509695646425
         children [
           Shape {
             appearance USE WHEEL_APP
@@ -279,12 +280,14 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position -0.00197276664526901
         axis 0 0 1
         anchor 0.184074 0.272 -0.0375
         dampingConstant 0.01
       }
       endPoint Solid {
-        translation 0.176074 0.272 -0.0375
+        translation 0.1760740155672279 0.2720157821229253 -0.0375
+        rotation 0 0 -1 0.0019727666453001383
         children [
           DEF FORK_SHAPE Shape {
             appearance PBRAppearance {
@@ -300,12 +303,13 @@ DEF ROSEY Robot {
           }
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 154.59827717898943
               axis 0 1 0
               anchor 0 0.01725 0
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.2354821121268713 0.6872207452300503 -0.687223269537435 3.6041285989380896
               children [
                 DEF CASTER_WHEEL_SHAPE Shape {
                   appearance USE WHEEL_APP
@@ -326,12 +330,13 @@ DEF ROSEY Robot {
           }
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 153.2610999541044
               axis 0 1 0
               anchor 0 -0.01725 0
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 1 0 0 1.5708
+              rotation 0.2415433170242539 0.6861681160992041 -0.6861706365400589 2.66758686574863
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -359,22 +364,25 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position -0.0019817375532511505
         axis 0 0 1
         anchor 0.184074 -0.272 -0.0375
         dampingConstant 0.01
       }
       endPoint Solid {
-        translation 0.176074 -0.272 -0.0375
+        translation 0.17607401570912978 -0.27198414610995114 -0.0375
+        rotation 0 0 -0.9999999999999999 0.001981737553265866
         children [
           USE FORK_SHAPE
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 133.8926946721913
               axis 0 1 0
               anchor 0 0.01725 0
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.43388502928586653 -0.6370795867315959 0.6370819268598831 3.9603343968229594
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -386,12 +394,13 @@ DEF ROSEY Robot {
           }
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 132.53376084164847
               axis 0 1 0
               anchor 0 -0.01725 0
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.9195631597970825 -0.27785160426739625 0.27785262487520146 4.628626878390177
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -409,22 +418,25 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position 0.0017597752400727294
         axis 0 0 1
         anchor -0.137926 0.272 -0.0375
         dampingConstant 0.01
       }
       endPoint Solid {
-        translation -0.145926 0.272 -0.0375
+        translation -0.14592598761276762 0.2719859218053457 -0.0375
+        rotation 0 0 1 0.0017597752400514337
         children [
           USE FORK_SHAPE
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 154.47219740249542
               axis 0 1 0
               anchor 0 0.01725 0
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.1899532139152094 0.6942313144246616 -0.6942338644833521 3.5170248870589
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -436,12 +448,13 @@ DEF ROSEY Robot {
           }
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 153.13724509439587
               axis 0 1 0
               anchor 0 -0.01725 0
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 1 0 0 1.5708
+              rotation 0.2867254216358327 0.677416106009531 -0.6774185943023986 2.583126134190405
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -459,22 +472,25 @@ DEF ROSEY Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
+        position 0.0017779267099588764
         axis 0 0 1
         anchor -0.137926 -0.272 -0.0375
         dampingConstant 0.01
       }
       endPoint Solid {
-        translation -0.145926 -0.272 -0.0375
+        translation -0.14592598735590978 -0.27201422340618625 -0.0375
+        rotation 0 0 1 0.0017779267098510599
         children [
           USE FORK_SHAPE
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 133.60213567935813
               axis 0 1 0
               anchor 0 0.01725 0
             }
             endPoint Solid {
               translation 0 0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.544859129878911 -0.592927460087782 0.5929296380359542 4.13936500643956
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
@@ -486,12 +502,13 @@ DEF ROSEY Robot {
           }
           HingeJoint {
             jointParameters HingeJointParameters {
+              position 132.2638778770566
               axis 0 1 0
               anchor 0 -0.01725 0
             }
             endPoint Solid {
               translation 0 -0.01725 0
-              rotation 1 0 0 1.5708
+              rotation -0.9753923025890353 -0.15590009220024326 0.15590066485430928 4.687472358497384
               children [
                 USE CASTER_WHEEL_SHAPE
               ]
