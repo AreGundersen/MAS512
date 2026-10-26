@@ -36,7 +36,7 @@ testFraction           = 0.2        # Share of the frames that is held out for t
 randomSeed             = 42         # Fixed seed so that the split is the same every run
 hiddenLayers           = (16, 16)   # Neural network for f_theta: two hidden layers with 16 neurons each
 maxEpochs              = 300        # Maximum number of training epochs (passes over the training data)
-stopLoss               = 1e-3       # Training stops early when the training loss (MSE of the scaled data) gets below this value. None = always run all epochs
+stopLoss               = 1e-2       # Training stops early when the training loss (MSE of the scaled data) gets below this value. None = always run all epochs
 
 # 1. Load the box centres and depth from Q1_Camera.py ---------------------------------------------------
 data        = np.loadtxt(inputCsv, delimiter=",", skiprows=1)               # Columns: frame, cx, cy, Z, searchRadius

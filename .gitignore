@@ -8,7 +8,6 @@
 /Assignment 1/Assignment 1-class/train/labels
 /Assignment 1/Assignment 1-class/test/labels
 *.cache
-*.csv
-args*.yaml
+*.yaml
 /Assignment 1/runs
 
