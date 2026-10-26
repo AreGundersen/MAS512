@@ -19,7 +19,7 @@ roiMin         = np.array([0.0, 0.8, -0.3])                  # Region of interes
 roiMax         = np.array([1.6, 3.0, 1.2])                   # Upper corner. The box contains the whole swing of the load but not the walls, floor and equipment of the lab
 dbscanEps      = 0.08                                        # DBSCAN: points closer than this (m) belong to the same cluster
 dbscanMinPts   = 10                                          # DBSCAN: minimum number of points in a cluster
-bodyHeight     = 0.30                                        # The load is a block of about 0.3 m; the sling and hook above it are cut away (they come and go and make the centre z jump)
+bodyHeight     = 0.26                                        # The load is a block of about 0.3 m; the sling and hook above it are cut away (they come and go and make the centre z jump)
 gravity        = 9.81                                        # m/s^2, used for the pendulum length
 saveHtml       = True                                        # Also save an interactive 3D plot (plotly) that can be rotated
 

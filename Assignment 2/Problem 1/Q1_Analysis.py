@@ -31,7 +31,7 @@ principalXDefault = 325.0
 principalYDefault = 235.0
 
 # Parameters
-estimatedPendulumLength = 1.8        # Real length of the pendulum string in meters, used as reference in (c). None = not measured
+estimatedPendulumLength = 1.8        # Real length of the pendulum string in meters, used as reference in (c).
 testFraction           = 0.2        # Share of the frames that is held out for testing the model in (d)
 randomSeed             = 42         # Fixed seed so that the split is the same every run
 hiddenLayers           = (16, 16)   # Neural network for f_theta: two hidden layers with 16 neurons each
@@ -118,7 +118,7 @@ for name, points in trajectories.items():
     circleFits[name] = dict(planar=planar, center=np.array([circleX, circleY]), radius=radius)
     print(f"(c) {name}: fitted pendulum radius = {radius:.3f} m, circle-fit RMS residual = {rmsResidual * 1000:.1f} mm")
     if estimatedPendulumLength is not None:
-        print(f"    difference to measured string length: {(radius - estimatedPendulumLength) * 1000:.1f} mm")
+        print(f"    difference to estimated string length: {(radius - estimatedPendulumLength) * 1000:.1f} mm")
 
 # 4. (d): learn f_theta(o1) = o2* -----------------------------------------------------------------------
 o1Train, o1Test, o2Train, o2Test = train_test_split(o1, o2, test_size=testFraction, random_state=randomSeed)   # Random split into train and test
@@ -181,7 +181,7 @@ ax.set_ylabel("Euclidean error [mm]")
 ax.legend()
 fig.savefig(outputDir / "euclidean_errors.png", dpi=150)
 
-# 6. (c) visual: what each matrix says compared with the measured pendulum --------------------------------
+# 6. (c) visual: what each matrix says compared with the estimated pendulum --------------------------------
 fig, (axO1, axO2, axO3, axRadius) = plt.subplots(1, 4, figsize=(23, 5))
 for ax, (name, fit) in zip((axO1, axO2, axO3), circleFits.items()):
     planar, circleCenter, fittedRadius = fit["planar"], fit["center"], fit["radius"]
@@ -193,9 +193,9 @@ for ax, (name, fit) in zip((axO1, axO2, axO3), circleFits.items()):
     ax.plot(circleCenter[0] + fittedRadius * np.cos(arc), circleCenter[1] + fittedRadius * np.sin(arc),
             color="tab:red", label=f"fitted circle, r = {fittedRadius:.3f} m")
     if estimatedPendulumLength is not None:
-        # The real circle: same centre (the pivot is unknown) but the measured string length as radius
+        # The real circle: same centre (the pivot is unknown) but the estimated string length as radius
         ax.plot(circleCenter[0] + estimatedPendulumLength * np.cos(arc), circleCenter[1] + estimatedPendulumLength * np.sin(arc),
-                color="black", linestyle="--", label=f"measured string, L = {estimatedPendulumLength:.3f} m")
+                color="black", linestyle="--", label=f"estimated string, L = {estimatedPendulumLength:.3f} m")
     ax.set_aspect("equal")
     ax.set_xlabel("in-plane coordinate 1 [m]")
     ax.set_ylabel("in-plane coordinate 2 [m]")
@@ -204,11 +204,11 @@ for ax, (name, fit) in zip((axO1, axO2, axO3), circleFits.items()):
 
 axRadius.bar([name[:2] for name in circleFits.keys()], [fit["radius"] for fit in circleFits.values()], color=["tab:blue", "tab:orange", "tab:green"])   # Radius implied by each matrix
 if estimatedPendulumLength is not None:
-    axRadius.axhline(estimatedPendulumLength, color="black", linestyle="--", label=f"measured string length {estimatedPendulumLength:.3f} m")
+    axRadius.axhline(estimatedPendulumLength, color="black", linestyle="--", label=f"estimated string length {estimatedPendulumLength:.3f} m")
     axRadius.legend()
 axRadius.set_ylabel("pendulum radius [m]")
 axRadius.set_title("Radius implied by each matrix")
 plt.tight_layout()
-fig.savefig(outputDir / "swing_plane_vs_measured.png", dpi=150)
+fig.savefig(outputDir / "swing_plane_vs_estimated.png", dpi=150)
 
 plt.show()
