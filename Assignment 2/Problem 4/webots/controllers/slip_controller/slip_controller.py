@@ -2,7 +2,7 @@ import math
 import os
 from controller import Supervisor
 
-# --- parameters ---
+# parameters
 R_W = 0.0625        # wheel radius [m]
 B = 0.2529          # wheel track [m]
 LIDAR_X = 0.19731   # lidar position along robot x [m]
@@ -11,11 +11,11 @@ ACC = 1.5           # max speed change [m/s^2]
 STOP_DIST = 0.6     # stop when lidar range to goal is below this [m]
 CORRIDOR = 0.5      # half-width of free corridor [m]
 LOOK = 1.6          # corridor length [m]
-V_MIN = 0         # slip is undefined below this speed [m/s]
+V_MIN = 0         
 T_MAX = 120.0       # timeout [s]
 INF = float('inf')
 
-# --- setup ---
+# setup 
 robot = Supervisor()
 node = robot.getSelf()
 STEP = int(robot.getBasicTimeStep())
@@ -35,7 +35,7 @@ lidar = robot.getDevice("lidar")
 lidar.enable(4 * STEP)
 N = lidar.getHorizontalResolution()
 
-# --- logging (<webots>/results/<customData>.csv) ---
+# logging (<webots>/results/<customData>.csv)
 name = robot.getCustomData() or "run"
 res_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "results")
 os.makedirs(res_dir, exist_ok=True)
@@ -54,8 +54,6 @@ def ray_angle(i):
 
 
 def find_goal(d):
-    """Find a narrow object (8-30 cm) with free space on both sides.
-    Returns (x, y, range) in the robot frame, or None."""
     best = None
     i = 0
     while i < N:
@@ -78,7 +76,6 @@ def find_goal(d):
 
 
 def blocked(angle, pts):
-    """True if a point lies inside the corridor along 'angle'."""
     c, s = math.cos(angle), math.sin(angle)
     return any(0 < x * c + y * s < LOOK and abs(-x * s + y * c) < CORRIDOR for x, y in pts)
 
@@ -108,14 +105,13 @@ while robot.step(STEP) != -1:
     vel, Rm, pos = node.getVelocity(), node.getOrientation(), node.getPosition()
     true_speed = vel[0] * Rm[0] + vel[1] * Rm[3] + vel[2] * Rm[6]
 
-    # low-pass filter both speeds the same way
     v_enc += 0.1 * (enc_speed - v_enc)
     v_x += 0.1 * (true_speed - v_x)
     slip = (v_enc - v_x) / v_x if abs(v_x) > V_MIN else float('nan')
     if slip == slip:
         slips.append(slip)
 
-    # --- lidar, every 4th step ---
+    # lidar
     if step % 4 == 0 and t > 0.1:
         r = lidar.getRangeImage()
         if step % 24 == 0:
@@ -148,7 +144,7 @@ while robot.step(STEP) != -1:
             if found and found[2] < STOP_DIST:
                 state, stop_t = "STOP", t
 
-        # try headings next to the goal direction first: 0, +15, -15, +30, -30 ... deg
+        # try headings next to the goal direction first
         options = [bearing + s * math.radians(15 * k) for k in range(13) for s in (1, -1)]
         heading = wrap(next((a for a in options if not blocked(a, pts)), math.pi))
 
@@ -169,7 +165,7 @@ while robot.step(STEP) != -1:
     if step % 125 == 0:
         print(f"t={t:5.1f} {state:8s} pos=({pos[0]:5.2f},{pos[1]:5.2f}) v_enc={v_enc:6.3f} v_x={v_x:6.3f} slip={slip:7.3f}")
 
-    # --- done: stopped at the goal or timeout ---
+    # FINISHED
     if (state == "STOP" and t - stop_t > 1.5) or t > T_MAX:
         motor_l.setVelocity(0.0)
         motor_r.setVelocity(0.0)
