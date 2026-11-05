@@ -1,0 +1,5 @@
+numpy
+gymnasium
+stable-baselines3
+matplotlib
+# torch installeres separat (CPU-versjon holder): pip install torch --index-url https://download.pytorch.org/whl/cpu

@@ -1,0 +1,594 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  basicTimeStep 8
+  contactProperties [
+    ContactProperties {
+      material1 "wheel"
+      material2 "floor"
+      coulombFriction [
+        0.9
+      ]
+      softCFM 1e-05
+    }
+    ContactProperties {
+      material1 "caster"
+      material2 "floor"
+      coulombFriction [
+        0.3
+      ]
+      softCFM 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.23904310200986595 0.2197779614665526 -0.9458097287695381 1.6347316467796356
+  position 1.2017083746929025 12.250828439913578 7.961723857409249
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF FLOOR Solid {
+  translation 0 0 -0.05
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0.65 0.3
+        }
+      }
+      geometry DEF FLOOR_BOX Box {
+        size 10 10 0.1
+      }
+    }
+  ]
+  name "floor"
+  contactMaterial "floor"
+  boundingObject USE FLOOR_BOX
+}
+DEF WALLS Group {
+  children [
+    Solid {
+      translation 0 5 0.5
+      children [
+        Shape {
+          appearance DEF WALL_APP Appearance {
+            material Material {
+            }
+          }
+          geometry DEF WALL_BOX Box {
+            size 10 0.1 1
+          }
+        }
+      ]
+      name "wall_1"
+      boundingObject USE WALL_BOX
+    }
+    Solid {
+      translation 0 -5 0.5
+      children [
+        Shape {
+          appearance USE WALL_APP
+          geometry USE WALL_BOX
+        }
+      ]
+      name "wall_2"
+      boundingObject USE WALL_BOX
+    }
+    Solid {
+      translation 5 0 0.5
+      rotation 0 0 1 1.5708
+      children [
+        Shape {
+          appearance USE WALL_APP
+          geometry USE WALL_BOX
+        }
+      ]
+      name "wall_3"
+      boundingObject USE WALL_BOX
+    }
+    Solid {
+      translation -5 0 0.5
+      rotation 0 0 1 1.5708
+      children [
+        Shape {
+          appearance USE WALL_APP
+          geometry USE WALL_BOX
+        }
+      ]
+      name "wall_4"
+      boundingObject USE WALL_BOX
+    }
+  ]
+}
+DEF OBSTACLES Group {
+  children [
+    Solid {
+      translation 3 2.5 0.5
+      children [
+        Shape {
+          appearance DEF OBST_APP Appearance {
+            material Material {
+              diffuseColor 0.3 0.4 0.8
+            }
+          }
+          geometry DEF OBST_BOX Box {
+            size 0.6 0.6 1
+          }
+        }
+      ]
+      name "box_1"
+      boundingObject USE OBST_BOX
+    }
+    Solid {
+      translation -2.5 -3 0.5
+      rotation 0 0 1 0.6
+      children [
+        Shape {
+          appearance USE OBST_APP
+          geometry DEF OBST_BOX_2 Box {
+            size 1.2 0.4 1
+          }
+        }
+      ]
+      name "box_2"
+      boundingObject USE OBST_BOX_2
+    }
+    Solid {
+      translation -3 2.5 0.5
+      children [
+        Shape {
+          appearance USE OBST_APP
+          geometry DEF OBST_CYL Cylinder {
+            height 1
+            radius 0.25
+          }
+        }
+      ]
+      name "pillar_1"
+      boundingObject USE OBST_CYL
+    }
+    Solid {
+      translation 2 -2.5 0.5
+      children [
+        Shape {
+          appearance USE OBST_APP
+          geometry USE OBST_CYL
+        }
+      ]
+      name "pillar_2"
+      boundingObject USE OBST_CYL
+    }
+  ]
+}
+DEF GOAL Solid {
+  translation 3.5 4 0.5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.8 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Cylinder {
+        height 1
+        radius 0.1
+      }
+    }
+  ]
+  name "goal"
+  boundingObject Cylinder {
+    height 1
+    radius 0.1
+  }
+}
+DEF ROSEY Robot {
+  translation 2.771221356105364 3.4812900199883434 0.062455194229443844
+  rotation 1.2902560498309804e-05 -4.000377543551248e-05 0.999999999116611 0.6228596973843128
+  children [
+    Pose {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.9 0.9 0.9
+            roughness 0.6
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "../meshes/chassis.stl"
+            ]
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 58.197490560917835
+        axis 0 1 0
+        anchor 0 0.126 0
+      }
+      device [
+        RotationalMotor {
+          name "left_wheel_motor"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "left_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.126 0
+        rotation -0.5473282119468941 -0.5917893440985775 0.5917915178662088 4.143168799825916
+        children [
+          Shape {
+            appearance DEF WHEEL_APP PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 1
+              metalness 0
+            }
+            geometry DEF DRIVE_WHEEL Cylinder {
+              height 0.02529
+              radius 0.0625
+            }
+          }
+        ]
+        name "left_wheel"
+        contactMaterial "wheel"
+        boundingObject USE DRIVE_WHEEL
+        physics Physics {
+          density -1
+          mass 1.5
+        }
+        linearVelocity 1.6271171633254344e-10 1.2259582883708808e-10 -4.483384772619899e-15
+        angularVelocity -1.4228009459804016e-11 2.0855118021175396e-11 -1.5602787063365264e-10
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 53.648087660321046
+        axis 0 1 0
+        anchor 0 -0.126 0
+      }
+      device [
+        RotationalMotor {
+          name "right_wheel_motor"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "right_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.126 0
+        rotation -0.08531366212781584 0.7045274773152466 -0.7045300651939246 3.3118071882607767
+        children [
+          Shape {
+            appearance USE WHEEL_APP
+            geometry USE DRIVE_WHEEL
+          }
+        ]
+        name "right_wheel"
+        contactMaterial "wheel"
+        boundingObject USE DRIVE_WHEEL
+        physics Physics {
+          density -1
+          mass 1.5
+        }
+        linearVelocity -1.68680788750033e-10 -1.154789109303103e-10 4.660253905683881e-15
+        angularVelocity 1.526901888588798e-11 -2.0230147729915755e-11 -1.560249998583549e-10
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -0.002884856544426353
+        axis 0 0 1
+        anchor 0.184074 0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation 0.17607403328956606 0.27202307882034354 -0.0375
+        rotation 0 0 -1 0.002884856544459135
+        children [
+          DEF FORK_SHAPE Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.6 0.6
+              roughness 0.5
+              metalness 0
+            }
+            geometry Mesh {
+              url [
+                "../meshes/casterWheelsFork.stl"
+              ]
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 148.5882883517378
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 0.3356079490707026 -0.6660946047816501 0.6660970514882453 2.494002250089806
+              children [
+                DEF CASTER_WHEEL_SHAPE Shape {
+                  appearance USE WHEEL_APP
+                  geometry DEF CASTER_WHEEL Cylinder {
+                    height 0.013
+                    radius 0.025
+                  }
+                }
+              ]
+              name "caster_1_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics DEF CASTER_PHYS Physics {
+                density -1
+                mass 0.02
+              }
+              linearVelocity -3.003839755295749e-11 2.5091412527220157e-11 8.226752612472411e-15
+              angularVelocity 2.2498401930060266e-10 -3.116436524983801e-10 3.0419373014546735e-09
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 147.38478300367836
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation -0.09562930447258591 -0.7038648295348738 0.7038674149795062 3.3322707269374146
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_1_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity 5.536239005396498e-11 8.608858020171199e-11 -2.23265850252119e-14
+              angularVelocity -2.2046285686937314e-09 3.0918795404350055e-09 3.0419771839329036e-09
+            }
+          }
+        ]
+        name "caster_fork_1"
+        boundingObject DEF FORK_BO Pose {
+          translation 0 0 0.012
+          children [
+            Box {
+              size 0.03 0.02 0.025
+            }
+          ]
+        }
+        physics DEF FORK_PHYS Physics {
+          density -1
+          mass 0.043
+        }
+        linearVelocity 3.157598881573288e-11 2.9096147941337896e-11 -1.332267629550188e-15
+        angularVelocity 1.357098549412832e-12 9.877509575487429e-13 3.0417271444623773e-09
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -0.002920482617312814
+        axis 0 0 1
+        anchor 0.184074 -0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation 0.17607403411685063 -0.2719766361722741 -0.0375
+        rotation 0 0 -1 0.0029204826173612895
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 129.74350749468437
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation -0.3373777513253331 0.665647428374634 -0.6656498734386556 3.7923626352591304
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_2_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity -1.0799800703931899e-10 -2.7437175270578545e-11 1.6753265441593613e-14
+              angularVelocity 2.4089937510594814e-09 -3.370951909644714e-09 3.5687295490181095e-09
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 128.34601995669198
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 0.16308282284924216 0.6976390246320114 -0.6976415872079434 2.818274459200093
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_2_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity -7.786704967475316e-12 4.4111173591554165e-11 -1.5221157667610896e-14
+              angularVelocity -4.407157339743958e-10 6.226177886897846e-10 3.5688053567880914e-09
+            }
+          }
+        ]
+        name "caster_fork_2"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+        linearVelocity -3.7632847480219704e-11 -2.0053210757386847e-11 1.4531012052535773e-14
+        angularVelocity -2.3424759795415194e-13 -2.376569210630616e-13 3.5685328183827813e-09
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 0.0027431034310969617
+        axis 0 0 1
+        anchor -0.137926 0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation -0.14592596990155313 0.2719780552000723 -0.0375
+        rotation 0 0 0.9999999999999999 0.0027431034311559722
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 149.0574384289171
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 0.5126967867670558 -0.6070993729056893 0.6071016029102997 2.194088899366233
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_3_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity 1.6579541756247304e-10 6.789639124110534e-11 -9.536815781530095e-15
+              angularVelocity -4.083489273202387e-09 5.64882541953144e-09 -7.629851535517455e-09
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 147.76337380990873
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 0.03837676846967384 -0.7065845865310576 0.7065871819659335 3.064877045169898
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_3_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity -4.760438289223845e-11 -8.621612121958615e-11 8.93729534823251e-15
+              angularVelocity 2.0823270995163253e-09 -2.8881663274441202e-09 -7.629900068812228e-09
+            }
+          }
+        ]
+        name "caster_fork_3"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+        linearVelocity 3.610137507896687e-11 2.2653602447558636e-11 -1.058584744410033e-14
+        angularVelocity -1.2182786682558486e-12 -6.552578228432398e-13 -7.629657079546824e-09
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 0.0027802774649275486
+        axis 0 0 1
+        anchor -0.137926 -0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation -0.1459259690802488 -0.27202224219106425 -0.0375
+        rotation 0 0 1 0.0027802774649951863
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 129.137567361568
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation -0.11774300735057913 0.7021869273698094 -0.7021895066511515 3.3759985647554838
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_4_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity 9.987521413945696e-11 2.1767707346579e-11 -5.2735593669694936e-15
+              angularVelocity -2.2016062920611476e-09 3.0422069792488023e-09 -7.886965890815515e-09
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              position 127.85293343407716
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 0.3426288431669194 0.664304987877993 -0.6643074280109461 2.4814087965809177
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_4_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+              linearVelocity -1.2070158399752773e-10 -1.3757169219336362e-10 1.1779466291272912e-14
+              angularVelocity 4.1832390009142035e-09 -5.79499863248055e-09 -7.886918942861992e-09
+            }
+          }
+        ]
+        name "caster_fork_4"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+        linearVelocity -3.359924245319749e-11 -2.5769522618826548e-11 1.8496831973057263e-14
+        angularVelocity -2.419788092757095e-12 -2.0231698056770618e-12 -7.886580528999377e-09
+      }
+    }
+    DEF LIDAR_MOUNT Pose {
+      translation 0.19731 0 0.05068
+      children [
+        Lidar {
+          horizontalResolution 1080
+          fieldOfView 6.2832
+          numberOfLayers 1
+          minRange 0.1
+          maxRange 20
+        }
+      ]
+    }
+  ]
+  name "Rosey"
+  boundingObject Pose {
+    translation 0 0 0.45
+    children [
+      Box {
+        size 0.6 0.5 0.7
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 40
+    centerOfMass [
+      0 0 0.35
+    ]
+    inertiaMatrix [
+      2 2 1.5
+      0 0 0
+    ]
+  }
+  controller "slip_controller"
+  customData "low_slip"
+  supervisor TRUE
+  linearVelocity 3.977972032982377e-12 -5.438178531168118e-12 6.480149750132114e-16
+  angularVelocity -7.220338026971067e-14 -7.039520575727704e-14 -1.5601670786151904e-10
+}

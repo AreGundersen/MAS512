@@ -1,0 +1,187 @@
+#VRML_OBJ R2025a utf8
+# =====================================================================
+# Rosey – første versjon (manuelt bygget)
+# Alle tall merket "FRA CAD" er plassholdere som må byttes ut.
+# Koordinater: meter, x fremover, y mot venstre, z opp.
+# Origo: på gulvet, midt mellom drivhjulene.
+# Drivsylinderen er antatt låst i v1 (ikke modellert som eget ledd).
+# =====================================================================
+Robot {
+  translation 0 0 0.001          # 1 mm over gulvet så den ikke starter "i" gulvet
+  name "Rosey"
+  controller "slip_controller"
+  supervisor FALSE
+  children [
+
+    # ---------------- CHASSIS: kun visuelt ----------------
+    Pose {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.9 0.9 0.9
+            roughness 0.6
+            metalness 0
+          }
+          geometry Mesh {
+            url [ "../meshes/chassis.stl" ]   # eksportert i METER fra SolidWorks
+          }
+        }
+      ]
+    }
+
+    # ---------------- VENSTRE DRIVHJUL ----------------
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0                       # hjulet roterer om y
+        anchor 0 0.20 0.08               # FRA CAD: (0, sporvidde/2, hjulradius)
+      }
+      device [
+        RotationalMotor {
+          name "left_wheel_motor"
+          maxVelocity 20                 # FRA CAD/motordatablad [rad/s]
+          maxTorque 10                   # FRA CAD/motordatablad [Nm]
+        }
+        PositionSensor {
+          name "left_wheel_sensor"
+          resolution 0.0                 # sett f.eks. 2*pi/(antall hall-pulser) senere
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.20 0.08          # samme som anchor
+        rotation 1 0 0 1.5708            # legger sylinderaksen langs y
+        name "left_wheel"
+        contactMaterial "wheel"
+        children [
+          Shape {
+            appearance PBRAppearance { baseColor 0.1 0.1 0.1 roughness 1 metalness 0 }
+            geometry Cylinder { height 0.04 radius 0.08 }   # FRA CAD: bredde, radius
+          }
+        ]
+        boundingObject Cylinder { height 0.04 radius 0.08 }
+        physics Physics {
+          density -1
+          mass 1.5                       # FRA CAD (hjul + det som roterer med det)
+        }
+      }
+    }
+
+    # ---------------- HØYRE DRIVHJUL ----------------
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.20 0.08
+      }
+      device [
+        RotationalMotor {
+          name "right_wheel_motor"
+          maxVelocity 20
+          maxTorque 10
+        }
+        PositionSensor {
+          name "right_wheel_sensor"
+          resolution 0.0
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.20 0.08
+        rotation 1 0 0 1.5708
+        name "right_wheel"
+        contactMaterial "wheel"
+        children [
+          Shape {
+            appearance PBRAppearance { baseColor 0.1 0.1 0.1 roughness 1 metalness 0 }
+            geometry Cylinder { height 0.04 radius 0.08 }
+          }
+        ]
+        boundingObject Cylinder { height 0.04 radius 0.08 }
+        physics Physics {
+          density -1
+          mass 1.5
+        }
+      }
+    }
+
+    # ---------------- STØTTEHJUL (forenklet som kuler) ----------------
+    # Senteret må ligge i z = kuleradius (+ evt. 1–2 mm klaring, se notat).
+    BallJoint {
+      jointParameters BallJointParameters { anchor 0.25 0.20 0.03 }   # FRA CAD
+      endPoint Solid {
+        translation 0.25 0.20 0.03
+        name "caster_front_left"
+        contactMaterial "caster"
+        children [ Shape { geometry Sphere { radius 0.03 } } ]
+        boundingObject Sphere { radius 0.03 }
+        physics Physics { density -1 mass 0.1 }
+      }
+    }
+    BallJoint {
+      jointParameters BallJointParameters { anchor 0.25 -0.20 0.03 }
+      endPoint Solid {
+        translation 0.25 -0.20 0.03
+        name "caster_front_right"
+        contactMaterial "caster"
+        children [ Shape { geometry Sphere { radius 0.03 } } ]
+        boundingObject Sphere { radius 0.03 }
+        physics Physics { density -1 mass 0.1 }
+      }
+    }
+    BallJoint {
+      jointParameters BallJointParameters { anchor -0.25 0.20 0.03 }
+      endPoint Solid {
+        translation -0.25 0.20 0.03
+        name "caster_rear_left"
+        contactMaterial "caster"
+        children [ Shape { geometry Sphere { radius 0.03 } } ]
+        boundingObject Sphere { radius 0.03 }
+        physics Physics { density -1 mass 0.1 }
+      }
+    }
+    BallJoint {
+      jointParameters BallJointParameters { anchor -0.25 -0.20 0.03 }
+      endPoint Solid {
+        translation -0.25 -0.20 0.03
+        name "caster_rear_right"
+        contactMaterial "caster"
+        children [ Shape { geometry Sphere { radius 0.03 } } ]
+        boundingObject Sphere { radius 0.03 }
+        physics Physics { density -1 mass 0.1 }
+      }
+    }
+
+    # ---------------- SENSORER (Livox MID-360 m/ innebygd IMU) ----------------
+    Pose {
+      translation 0.20 0 0.90            # FRA CAD: lidarens posisjon
+      children [
+        Lidar {
+          name "lidar"
+          horizontalResolution 360
+          fieldOfView 6.2832
+          numberOfLayers 16
+          verticalFieldOfView 1.0        # tilnærming; MID-360 har ikke-repeterende mønster
+          minRange 0.1
+          maxRange 40
+        }
+        InertialUnit { name "imu" }
+        Gyro { name "gyro" }
+        Accelerometer { name "accelerometer" }
+      ]
+    }
+  ]
+
+  # ---------------- KOLLISJON + MASSE FOR CHASSIS ----------------
+  boundingObject Pose {
+    translation 0 0 0.45                 # FRA CAD: midt i chassis-boksen
+    children [
+      Box { size 0.60 0.50 0.70 }        # FRA CAD: ytre mål, men løftet over hjulene
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 40                              # FRA CAD (chassis uten hjul)
+    centerOfMass [ 0 0 0.35 ]            # FRA CAD: Mass Properties
+    inertiaMatrix [
+      2.0 2.0 1.5                        # Ixx Iyy Izz om massesenteret, FRA CAD
+      0 0 0                              # Ixy Ixz Iyz (start med 0)
+    ]
+  }
+}
