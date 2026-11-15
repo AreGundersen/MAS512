@@ -1,0 +1,2 @@
+test,start_x,start_y,start_yaw,result,time_s,length_m
+1,1.0,-7.5,0.0,collision,9.3,7.1

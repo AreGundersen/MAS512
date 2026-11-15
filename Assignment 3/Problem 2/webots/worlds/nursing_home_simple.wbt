@@ -1,0 +1,868 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/CementTiles.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/PorcelainChevronTiles.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/BrushedAluminium.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/apartment_structure/protos/Window.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/hospital/protos/HospitalBed.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/tables/protos/Table.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/chairs/protos/Chair.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/living_room_furniture/protos/Armchair.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/solids/protos/SolidBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/bathroom/protos/WashingMachine.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/plants/protos/PottedTree.proto"
+
+WorldInfo {
+  title "Sykehjem enkel"
+  basicTimeStep 8
+  contactProperties [
+    ContactProperties {
+      material1 "wheel"
+      material2 "floor"
+      coulombFriction [
+        0.3
+      ]
+      softCFM 1e-05
+    }
+    ContactProperties {
+      material1 "caster"
+      material2 "floor"
+      coulombFriction [
+        0.3
+      ]
+      softCFM 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.02835197143819393 -0.9977821987490167 -0.060223330820749814 5.401472853093286
+  position -11.361689234048981 -9.243579347527485 16.84106533069639
+}
+TexturedBackground {
+  texture "empty_office"
+  skybox FALSE
+  skyColor [
+    0.2 0.2 0.2
+  ]
+}
+DirectionalLight {
+  ambientIntensity 0.5
+  direction 0.3 0.2 -1
+}
+DEF scenery Group {
+  children [
+    Solid {
+      translation 11 -5 -0.05
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.85 0.85 0.83
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 22.6 10.6 0.1
+          }
+        }
+      ]
+      name "golv"
+      contactMaterial "floor"
+      boundingObject Box {
+        size 22.6 10.6 0.1
+      }
+    }
+    Solid {
+      translation 0 0 0.002
+      children [
+        Pose {
+          translation 3.75 -1.5 0
+          children [
+            Shape {
+              appearance Parquetry {
+                textureTransform TextureTransform {
+                  scale 7.5 3
+                }
+              }
+              geometry Plane {
+                size 7.5 3
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 11.25 -1.5 0
+          children [
+            Shape {
+              appearance Parquetry {
+                textureTransform TextureTransform {
+                  scale 7.5 3
+                }
+              }
+              geometry Plane {
+                size 7.5 3
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 7.5 -6.5 0
+          children [
+            Shape {
+              appearance PorcelainChevronTiles {
+                textureTransform TextureTransform {
+                  scale 15 7
+                }
+              }
+              geometry Plane {
+                size 15 7
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 18.5 -5 0
+          children [
+            Shape {
+              appearance CementTiles {
+                textureTransform TextureTransform {
+                  scale 7 10
+                }
+              }
+              geometry Plane {
+                size 7 10
+              }
+            }
+          ]
+        }
+      ]
+      name "golvtekstur"
+    }
+    Armchair {
+      translation 13.36 -4.45644 0
+      rotation 0 0 1 -2.3561953071795863
+      name "lenestol 2(1)"
+    }
+    Wall {
+      translation 1.575 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg 1"
+      size 0.15 3.15 2.4
+    }
+    Window {
+      translation 3.75 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg vindu 2"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 7.5 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg 3"
+      size 0.15 6.3 2.4
+    }
+    Window {
+      translation 11.25 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg vindu 4"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 14.875 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg 5"
+      size 0.15 6.05 2.4
+    }
+    Window {
+      translation 18.5 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg vindu 6"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 20.55 0 0
+      rotation 0 0 1 1.5708
+      name "nordvegg 7"
+      size 0.15 2.9 2.4
+    }
+    Wall {
+      translation 1.2 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg 1"
+      size 0.15 2.4 2.4
+    }
+    Window {
+      translation 3 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg vindu 2"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 5.25 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg 3"
+      size 0.15 3.3 2.4
+    }
+    Window {
+      translation 7.5 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg vindu 4"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 9.75 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg 5"
+      size 0.15 3.3 2.4
+    }
+    Window {
+      translation 12 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg vindu 6"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 15.25 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg 7"
+      size 0.15 5.3 2.4
+    }
+    Window {
+      translation 18.5 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg vindu 8"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 20.55 -10 0
+      rotation 0 0 1 1.5708
+      name "sorvegg 9"
+      size 0.15 2.9 2.4
+    }
+    Wall {
+      translation 0 -8.55 0
+      name "vestvegg 1"
+      size 0.15 2.9 2.4
+    }
+    Window {
+      translation 0 -6.5 0
+      name "vestvegg vindu 2"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 0 -2.95 0
+      name "vestvegg 3"
+      size 0.15 5.9 2.4
+    }
+    Wall {
+      translation 22 -8.8 0
+      name "ostvegg 1"
+      size 0.15 2.4 2.4
+    }
+    Window {
+      translation 22 -7 0
+      name "ostvegg vindu 2"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 22 -5 0
+      name "ostvegg 3"
+      size 0.15 2.8 2.4
+    }
+    Window {
+      translation 22 -3 0
+      name "ostvegg vindu 4"
+      size 0.15 1.2 2.4
+      bottomWallHeight 0.9
+      windowHeight 1.2
+      frameAppearance BrushedAluminium {
+      }
+    }
+    Wall {
+      translation 22 -1.2 0
+      name "ostvegg 5"
+      size 0.15 2.4 2.4
+    }
+    Wall {
+      translation 1.725 -3 0
+      rotation 0 0 1 1.5708
+      name "hallvegg nord 1"
+      size 0.15 3.45 2.4
+    }
+    Wall {
+      translation 7.5 -3 0
+      rotation 0 0 1 1.5708
+      name "hallvegg nord 2"
+      size 0.15 5.9 2.4
+    }
+    Wall {
+      translation 13.275 -3 0
+      rotation 0 0 1 1.5708
+      name "hallvegg nord 3"
+      size 0.15 3.45 2.4
+    }
+    Wall {
+      translation 7.5 -1.5 0
+      name "soveromskille 1"
+      size 0.15 3 2.4
+    }
+    Wall {
+      translation 15 -8.6 0
+      name "vaskeromvegg 1"
+      size 0.15 2.8 2.4
+    }
+    Wall {
+      translation 15 -2.9 0
+      name "vaskeromvegg 2"
+      size 0.15 5.8 2.4
+    }
+    HospitalBed {
+      translation 1.1 -1.7 0.28
+      name "seng Rom1"
+    }
+    Table {
+      translation 1.95 -2.5 0
+      name "nattbord Rom1"
+      size 0.45 0.45 0.55
+      feetSize 0.04 0.04
+      frameThickness 0.03
+    }
+    Chair {
+      translation 12.2 -9.08 0
+      rotation 0 0 -1 -1.5708053071795867
+      name "stol Rom1"
+    }
+    SolidBox {
+      translation 6.9 -1.5 1
+      name "skap Rom1"
+      size 0.6 1 2
+      appearance PBRAppearance {
+        baseColor 0.72 0.62 0.48
+        roughness 0.8
+        metalness 0
+      }
+    }
+    HospitalBed {
+      translation 8.6 -1.7 0.28
+      name "seng Rom2"
+    }
+    Table {
+      translation 9.45 -2.53 0
+      name "nattbord Rom2"
+      size 0.45 0.45 0.55
+      feetSize 0.04 0.04
+      frameThickness 0.03
+    }
+    Chair {
+      translation 11.35 -9.03 0
+      rotation 0 0 -1 -1.5708053071795867
+      name "stol Rom2"
+    }
+    SolidBox {
+      translation 14.4 -1.5 1
+      name "skap Rom2"
+      size 0.6 1 2
+      appearance PBRAppearance {
+        baseColor 0.72 0.62 0.48
+        roughness 0.8
+        metalness 0
+      }
+    }
+    HospitalBed {
+      translation 8.17388 -7.44662 0.28
+      rotation 0 0 1 -0.261795307179586
+      name "seng parkert 2"
+    }
+    SolidBox {
+      translation 9.82 -3.41 0.475
+      name "medisinvogn"
+      size 0.9 0.55 0.95
+      appearance PBRAppearance {
+        baseColor 0.82 0.82 0.85
+        roughness 0.8
+        metalness 0
+      }
+    }
+    Table {
+      translation 11.8 -8.55 0
+      rotation 0 0 1 1.5708
+      name "spisebord"
+    }
+    Chair {
+      translation 11.35 -7.95 0
+      rotation 0 0 1 -1.5708
+      name "spisestol 1"
+    }
+    Chair {
+      translation 12.25 -7.99 0
+      rotation 0 0 1 -1.5708
+      name "spisestol 2"
+    }
+    PottedTree {
+      translation 14.31 -3.63 0
+      name "plante 1"
+    }
+    PottedTree {
+      translation 0.9 -3.7 0
+      name "plante 2"
+    }
+    HospitalBed {
+      translation 2.6 -4 0.28
+      rotation 0 0 1 1.5708
+      name "seng parkert 4"
+    }
+    Armchair {
+      translation 2.2 -9.4 0
+      rotation 0 0 1 1.5708
+      name "lenestol 1"
+    }
+    Armchair {
+      translation 5.76706 -4.92552 0
+      rotation 0 0 1 -2.8797853071795863
+      name "lenestol 1(1)"
+    }
+    Armchair {
+      translation 4.6 -9.4 0
+      rotation 0 0 1 1.5708
+      name "lenestol 2"
+    }
+    WashingMachine {
+      translation 16.4 -0.6 0.53
+      rotation 0 0 1 -1.5707853071795865
+      name "vaskemaskin 1"
+    }
+    WashingMachine {
+      translation 17.4 -0.6 0.53
+      rotation 0 0 1 -1.5707853071795865
+      name "vaskemaskin 2"
+    }
+    WashingMachine {
+      translation 18.4 -0.6 0.53
+      rotation 0 0 1 -1.5707853071795865
+      name "vaskemaskin 3"
+    }
+    SolidBox {
+      translation 20.4 -0.81 0.45
+      name "sorteringsbord"
+      size 2 0.9 0.9
+      appearance PBRAppearance {
+        baseColor 0.72 0.62 0.48
+        roughness 0.8
+        metalness 0
+      }
+    }
+  ]
+}
+DEF GOAL Solid {
+  translation 19.5 -6.5 0.5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.9 0.2 0.1
+        roughness 0.5
+        metalness 0
+      }
+      geometry Cylinder {
+        height 1
+        radius 0.06
+      }
+    }
+  ]
+  name "mal"
+}
+DEF ROSEY Robot {
+  translation 1 -6.5 0.0625
+  children [
+    Pose {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.9 0.9 0.9
+            roughness 0.6
+            metalness 0
+          }
+          geometry Mesh {
+            url [
+              "../meshes/chassis.stl"
+            ]
+          }
+          castShadows FALSE
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.126 0
+      }
+      device [
+        RotationalMotor {
+          name "left_wheel_motor"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "left_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.126 0
+        rotation 1 -2.2278712427307476e-15 -1.0990627025391603e-15 1.570799999999949
+        children [
+          Shape {
+            appearance DEF WHEEL_APP PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 1
+              metalness 0
+            }
+            geometry DEF DRIVE_WHEEL Cylinder {
+              height 0.02529
+              radius 0.0625
+            }
+          }
+        ]
+        name "left_wheel"
+        contactMaterial "wheel"
+        boundingObject USE DRIVE_WHEEL
+        physics Physics {
+          density -1
+          mass 1.5
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.126 0
+      }
+      device [
+        RotationalMotor {
+          name "right_wheel_motor"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "right_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.126 0
+        rotation 1 -2.7476567563479195e-15 -9.420537450335725e-16 1.5707999999999358
+        children [
+          Shape {
+            appearance USE WHEEL_APP
+            geometry USE DRIVE_WHEEL
+          }
+        ]
+        name "right_wheel"
+        contactMaterial "wheel"
+        boundingObject USE DRIVE_WHEEL
+        physics Physics {
+          density -1
+          mass 1.5
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.184074 0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation 0.17607400000000056 0.2720000000000003 -0.0375
+        children [
+          DEF FORK_SHAPE Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.6 0.6
+              roughness 0.5
+              metalness 0
+            }
+            geometry Mesh {
+              url [
+                "../meshes/casterWheelsFork.stl"
+              ]
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 1 -6.515871736482198e-15 -2.7869089957243143e-15 1.5707999999999382
+              children [
+                DEF CASTER_WHEEL_SHAPE Shape {
+                  appearance USE WHEEL_APP
+                  geometry DEF CASTER_WHEEL Cylinder {
+                    height 0.013
+                    radius 0.025
+                  }
+                }
+              ]
+              name "caster_1_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics DEF CASTER_PHYS Physics {
+                density -1
+                mass 0.02
+              }
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 1 -5.18129559768461e-15 -2.355134362583913e-15 1.5707999999999502
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_1_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+        ]
+        name "caster_fork_1"
+        boundingObject DEF FORK_BO Pose {
+          translation 0 0 0.012
+          children [
+            Box {
+              size 0.03 0.02 0.025
+            }
+          ]
+        }
+        physics DEF FORK_PHYS Physics {
+          density -1
+          mass 0.043
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.184074 -0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation 0.17607399999999981 -0.2719999999999999 -0.0375
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 1 -2.7770959358801886e-15 5.691574709577772e-16 1.5707999999999573
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_2_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 1 -2.8261612351006953e-15 2.041116447572725e-15 1.5707999999999507
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_2_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+        ]
+        name "caster_fork_2"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.137926 0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation -0.1459260000000006 0.2719999999999998 -0.0375
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 1 7.536429960268537e-15 -5.887835906459795e-15 1.570799999999946
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_3_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 1 -1.8448552506907367e-15 -2.433638841336717e-15 1.570799999999945
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_3_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+        ]
+        name "caster_fork_3"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.137926 -0.272 -0.0375
+        dampingConstant 0.01
+      }
+      endPoint Solid {
+        translation -0.14592600000000028 -0.27199999999999985 -0.0375
+        children [
+          USE FORK_SHAPE
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 0.01725 0
+            }
+            endPoint Solid {
+              translation 0 0.01725 0
+              rotation 1 -4.788773203920637e-15 3.140179150111893e-15 1.570799999999945
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_4_wheel_L"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+          HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 1 0
+              anchor 0 -0.01725 0
+            }
+            endPoint Solid {
+              translation 0 -0.01725 0
+              rotation 1 -1.962611968819929e-15 -5.4953135126958015e-16 1.570799999999949
+              children [
+                USE CASTER_WHEEL_SHAPE
+              ]
+              name "caster_4_wheel_R"
+              contactMaterial "caster"
+              boundingObject USE CASTER_WHEEL
+              physics USE CASTER_PHYS
+            }
+          }
+        ]
+        name "caster_fork_4"
+        boundingObject USE FORK_BO
+        physics USE FORK_PHYS
+      }
+    }
+    DEF LIDAR_MOUNT Pose {
+      translation 0.19731 0 0.05068
+      children [
+        Lidar {
+          horizontalResolution 510
+          fieldOfView 2.967
+          numberOfLayers 1
+          minRange 0.1
+          maxRange 20
+        }
+      ]
+    }
+  ]
+  name "Rosey"
+  boundingObject Pose {
+    translation 0 0 0.45
+    children [
+      Box {
+        size 0.6 0.5 0.7
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 40
+    centerOfMass [
+      0 0 0.35
+    ]
+    inertiaMatrix [
+      2 2 1.5
+      0 0 0
+    ]
+  }
+  controller "<extern>"
+  customData "nursing_home"
+  supervisor TRUE
+}
