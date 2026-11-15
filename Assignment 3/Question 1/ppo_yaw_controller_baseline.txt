@@ -1,0 +1,2 @@
+power=(0.5*self.rho*self.area*self.Cp*self.wind_speed**3*np.cos(yaw_rad)**3)
+reward=(self.power/1e6-0.05*abs(yaw_error)-0.02*abs(yaw_velocity))
