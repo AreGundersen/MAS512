@@ -1,20 +1,13 @@
-"""Train PPO in nursing_home_simple.wbt (straight-line reward).
-
-Usage:  python train_simple.py --steps 800000 --name ppo_simple_v4
-Webots: open worlds/nursing_home_simple.wbt (extern controller), reload the world, press play (fast mode).
-"""
 import argparse
 import os
-
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.monitor import Monitor
-
-from rosey_env_simple import RoseyNavEnv
+from rosey_env import RoseyNavEnv
 
 p = argparse.ArgumentParser()
 p.add_argument("--steps", type=int, default=800_000)
-p.add_argument("--name", default="ppo_simple")
+p.add_argument("--name", default="ppo")
 args = p.parse_args()
 
 os.makedirs("models", exist_ok=True)

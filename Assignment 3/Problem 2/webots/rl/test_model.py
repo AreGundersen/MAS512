@@ -5,18 +5,19 @@ import os
 import re
 import numpy as np
 from stable_baselines3 import PPO
-from rosey_env_simple import RoseyNavEnv, GOAL
+from rosey_env import RoseyNavEnv, GOAL
 
 p = argparse.ArgumentParser()
-p.add_argument("--model", default="models/ppo_simple_v4")
+p.add_argument("--model", default="models/ppo_v4")
 p.add_argument("--world", default="../worlds/nursing_home_simple.wbt")
 args = p.parse_args()
 
-# the 5 standard tests: (x, y, yaw) in the world frame; y spans -7.0 ... -5.8, yaw is kept small (<= 0.15 rad = 9 deg)
+# the 5 standard tests: (x, y, yaw) in the world frame
 TESTS = [(1.0, -6.5, 0.0), (1.0, -7.5, 0.5), (1.3, -6.8, 0.10), (0.8, -5.8, -0.10), (1.5, -6.0, 0.15)]
 
-OUT = "results/simple_trajectories"
+OUT = "results/trajectories"
 
+# connect to the environment, load the trained model, and run the tests
 os.makedirs("results", exist_ok=True)
 env = RoseyNavEnv()
 model = PPO.load(args.model, device="cpu")
@@ -49,10 +50,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
-# footprint (width, depth) for PROTOs without a size field
+# creates plot with the webots environments for trajectories (thanks claude)
 DEFAULT_SIZE = {"HospitalBed": (2.15, 1.05), "Chair": (0.6, 0.6), "Sofa": (1.95, 1.0), "Armchair": (0.95, 0.95),
                 "PottedTree": (0.65, 0.65), "WashingMachine": (0.7, 0.7), "Table": (1.9, 0.95)}
-
 
 def world_rects(path):
     """Read walls and furniture from the scenery group of the .wbt file as (type, x, y, width, depth, yaw)."""
